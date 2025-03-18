@@ -1,25 +1,27 @@
-require('dotenv').config(); // Carga variables de entorno desde el archivo .env
+const express = require('express')
+const products_routes = require('./routes/products.js')
+const slugify = require('slugify');
 
-const express = require('express');
-const products_routes = require('./routes/products.js');
+//Server instantiation
+const app = express()
 
-// Server instantiation
-const app = express();
-
-// Server configuration: template engine
+//Server configuration: template engine
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(express.static('/views'));
 
-// Middleware
-app.use(express.json());
-app.use('/', products_routes);
+//Midleware
+app.use(express.json())
+app.use('/', products_routes)
 
-// Obtener el puerto desde el archivo .env o usar 3000 por defecto
-const PORT = process.env.PORT || 3000;
+//Server startup
+app.listen(5000, () => {
+    const welcomeMessage = 'Server is listening on port 5000';
+    
+    // Slugize el mensaje con asteriscos como separadores
+    const sluggedMessage = slugify(welcomeMessage, { replacement: '*' });
 
-// Server startup
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
+    console.log(`Slugified message: ${sluggedMessage}`);
+})
+
 

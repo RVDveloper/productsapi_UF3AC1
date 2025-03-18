@@ -18,7 +18,7 @@ app.use('/', products_routes)
 app.listen(5000, () => {
     const welcomeMessage = 'Server is listening on port 5000';
     
-    // Slugize el mensaje con asteriscos como separadores
+    
     const sluggedMessage = slugify(welcomeMessage, { replacement: '*' });
 
     console.log(`Slugified message: ${sluggedMessage}`);

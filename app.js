@@ -1,21 +1,25 @@
-const express = require('express')
-const products_routes = require('./routes/products.js')
+require('dotenv').config(); // Carga variables de entorno desde el archivo .env
 
-//Server instantiation
-const app = express()
+const express = require('express');
+const products_routes = require('./routes/products.js');
 
-//Server configuration: template engine
+// Server instantiation
+const app = express();
+
+// Server configuration: template engine
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(express.static('/views'));
 
-//Midleware
-app.use(express.json())
-app.use('/', products_routes)
+// Middleware
+app.use(express.json());
+app.use('/', products_routes);
 
-//Server startup
-app.listen(5000, () => {
-    console.log('server is listening on port 5000')
-})
+// Obtener el puerto desde el archivo .env o usar 3000 por defecto
+const PORT = process.env.PORT || 3000;
 
+// Server startup
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});
 
